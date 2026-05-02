@@ -1,289 +1,203 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinturas Express | Tobias Barreto</title>
-    <!-- Google Fonts para um visual moderno -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-pink: #ff007a;
-            --dark-bg: #050505;
-            --card-bg: #121212;
-            --text-color: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinturas Express</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+body {
+  background: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+}
 
-        /* EFEITO DE RESPINGO (Simulado com Gradientes) */
-        .paint-splash {
-            position: absolute;
-            z-index: 1;
-            filter: blur(60px);
-            opacity: 0.4;
-            pointer-events: none;
-        }
+/* HERO */
+.hero {
+  height: 100vh;
+  background: url("images/banner.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
 
-        /* HERO SECTION */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/banner.png') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding: 20px;
-            border-bottom: 4px solid var(--neon-blue);
-        }
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+}
 
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
-        }
+.content {
+  position: relative;
+  z-index: 2;
+}
 
-        h1 span {
-            color: var(--neon-blue);
-        }
+h1 {
+  font-size: 3rem;
+}
 
-        .hero p {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            color: #ccc;
-        }
+p {
+  margin: 15px 0;
+  opacity: 0.8;
+}
 
-        /* BOTÕES NEON */
-        .btn-group {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+/* BOTÕES */
+.btn {
+  display: inline-block;
+  padding: 14px 30px;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #00f5d4, #00ff88);
+  color: #000;
+  text-decoration: none;
+  margin: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-        .btn {
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.4s;
-            border: 2px solid transparent;
-            position: relative;
-            z-index: 2;
-        }
+.btn:hover {
+  transform: scale(1.08);
+}
 
-        .btn-primary {
-            background: var(--neon-blue);
-            color: #000;
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
+/* SEÇÕES */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+}
 
-        .btn-secondary {
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-            box-shadow: inset 0 0 5px var(--neon-pink), 0 0 5px var(--neon-pink);
-        }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
 
-        .btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px var(--neon-blue);
-        }
+.card {
+  background: #111;
+  padding: 25px;
+  border-radius: 15px;
+  transition: 0.3s;
+}
 
-        .btn-secondary:hover {
-            background: var(--neon-pink);
-            color: #fff;
-            box-shadow: 0 0 30px var(--neon-pink);
-        }
+.card:hover {
+  transform: translateY(-10px);
+}
 
-        /* SEÇÃO SERVIÇOS */
-        .section {
-            padding: 100px 5%;
-            position: relative;
-        }
+/* ANIMAÇÃO */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s;
+}
 
-        .section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
+/* WHATSAPP */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none;
+}
 
-        .card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 5px solid var(--neon-blue);
-            transition: 0.3s;
-            text-align: left;
-        }
+/* FOOTER */
+footer {
+  padding: 20px;
+  text-align: center;
+  background: #000;
+}
+</style>
 
-        .card:hover {
-            transform: translateY(-10px);
-            background: #1a1a1a;
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            color: var(--neon-blue);
-        }
-
-        /* DIFERENCIAL */
-        .diferencial {
-            background: #080808;
-            text-align: center;
-        }
-
-        .check-list {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .check-list li {
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .check-list li::before {
-            content: '✓';
-            color: var(--neon-blue);
-            font-size: 1.5rem;
-        }
-
-        /* FOOTER & WHATSAPP */
-        footer {
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid #222;
-            color: #666;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-            z-index: 100;
-            transition: 0.3s;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.2);
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .section { padding: 60px 5%; }
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="content">
-            <p>PINTURAS EXPRESS</p>
-            <h1>Transformamos <span>Ambientes</span> em Experiências!</h1>
-            <p>Tobias Barreto - Sergipe</p>
-            
-            <div class="btn-group">
-                <a href="https://wa.me/5579981261812" class="btn btn-primary">Falar no WhatsApp</a>
-                <a href="https://instagram.com/pinturasexpresss" class="btn btn-secondary">Ver Instagram</a>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="content fade">
+    <h1>Transformamos ambientes em experiências</h1>
+    <p>Tobias Barreto - Sergipe</p>
+    <a href="https://wa.me/5579981261812" class="btn">Orçamento no WhatsApp</a>
+    <a href="https://instagram.com/pinturasexpress" class="btn">Instagram</a>
+  </div>
+</section>
 
-    <!-- Serviços -->
-    <section class="section">
-        <div class="paint-splash" style="top: 10%; right: -100px; width: 400px; height: 400px; background: var(--neon-pink);"></div>
-        
-        <h2>Nossos Serviços</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Pintura Residencial</h3>
-                <p>Acabamento impecável para casas e apartamentos com as melhores tintas do mercado.</p>
-            </div>
-            <div class="card">
-                <h3>Pintura Comercial</h3>
-                <p>Sua empresa com cara nova. Agilidade e profissionalismo para não parar seu negócio.</p>
-            </div>
-            <div class="card">
-                <h3>Texturas e Acabamentos</h3>
-                <p>Grafiato, cimento queimado, projetada e muito mais para dar personalidade às paredes.</p>
-            </div>
-            <div class="card">
-                <h3>Reformas</h3>
-                <p>Reparos em superfícies e preparação profissional para garantir durabilidade.</p>
-            </div>
-        </div>
-    </section>
+<!-- SERVIÇOS -->
+<section class="section fade">
+  <h2>Nossos Serviços</h2>
+  <div class="grid">
+    <div class="card">Pintura Residencial</div>
+    <div class="card">Pintura Comercial</div>
+    <div class="card">Texturas Premium</div>
+    <div class="card">Reformas</div>
+  </div>
+</section>
 
-    <!-- Diferenciais -->
-    <section class="section diferencial">
-        <h2>Por que nos escolher?</h2>
-        <p>Qualidade, compromisso e acabamento que você vê e sente.</p>
-        
-        <ul class="check-list">
-            <li>Profissionais Especializados</li>
-            <li>Acabamento de Alto Padrão</li>
-            <li>Cores que Inspiram</li>
-            <li>Pontualidade</li>
-        </ul>
-    </section>
+<!-- ANTES E DEPOIS -->
+<section class="section fade">
+  <h2>Antes e Depois</h2>
+  <div class="grid">
+    <div class="card">Projeto 1</div>
+    <div class="card">Projeto 2</div>
+    <div class="card">Projeto 3</div>
+  </div>
+</section>
 
-    <!-- Rodapé -->
-    <footer>
-        <p>© 2026 Pinturas Express - Tobias Barreto/SE</p>
-    </footer>
+<!-- DEPOIMENTOS -->
+<section class="section fade">
+  <h2>Clientes Satisfeitos</h2>
+  <div class="grid">
+    <div class="card">"Serviço perfeito, recomendo muito!"</div>
+    <div class="card">"Equipe profissional e rápida"</div>
+    <div class="card">"Melhor pintura da região!"</div>
+  </div>
+</section>
 
-    <!-- Botão Flutuante -->
-    <a href="https://wa.me/5579981261812" class="whatsapp-float">
-        <i>💬</i>
-    </a>
+<!-- CTA -->
+<section class="section fade">
+  <h2>Deixe seu ambiente novo hoje mesmo</h2>
+  <a href="https://wa.me/5579981261812" class="btn">Falar no WhatsApp</a>
+</section>
+
+<footer>
+  <p>© 2026 Pinturas Express - Tobias Barreto/SE</p>
+</footer>
+
+<a href="https://wa.me/5579981261812" class="whatsapp">💬</a>
+
+<script>
+const elements = document.querySelectorAll('.fade');
+
+function showOnScroll() {
+  const trigger = window.innerHeight * 0.85;
+  elements.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < trigger) {
+      el.classList.add('show');
+    }
+  });
+}
+
+window.addEventListener('scroll', showOnScroll);
+showOnScroll();
+</script>
 
 </body>
 </html>
