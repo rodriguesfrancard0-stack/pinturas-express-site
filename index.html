@@ -15,14 +15,15 @@
         }
 
         body {
-            color: #fff;
             background: #000;
+            color: #fff;
+            scroll-behavior: smooth;
         }
 
-        /* FUNDO COM IMAGEM */
+        /* HERO */
         .hero {
             height: 100vh;
-            background: url("images/banner.png") no-repeat center center/cover;
+            background: url("images/banner.png") center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -30,15 +31,14 @@
             position: relative;
         }
 
-        .hero::before {
+        .hero::after {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
         }
 
-        /* CONTEÚDO */
         .content {
             position: relative;
             z-index: 2;
@@ -46,35 +46,34 @@
 
         h1 {
             font-size: 3rem;
-            margin-bottom: 10px;
         }
 
         p {
-            margin-bottom: 20px;
+            margin: 15px 0;
+            opacity: 0.8;
         }
 
         /* BOTÕES */
         .btn {
             display: inline-block;
             padding: 14px 30px;
-            margin: 10px;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
             background: linear-gradient(45deg, #00f5d4, #00ff88);
             color: #000;
+            text-decoration: none;
+            margin: 10px;
+            font-weight: bold;
             transition: 0.3s;
         }
 
         .btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
-        /* SERVIÇOS */
+        /* SEÇÕES */
         .section {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            background: #0a0a0a;
         }
 
         .grid {
@@ -92,33 +91,38 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
-        /* CTA FINAL */
-        .cta {
-            padding: 60px;
-            text-align: center;
-            background: #000;
+        /* ANIMAÇÃO */
+        .fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s;
         }
 
-        /* WHATSAPP FLUTUANTE */
+        .fade.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* WHATSAPP */
         .whatsapp {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: #25D366;
-            color: #fff;
             padding: 15px;
             border-radius: 50%;
             font-size: 22px;
+            color: #fff;
             text-decoration: none;
         }
 
         /* FOOTER */
         footer {
-            text-align: center;
             padding: 20px;
+            text-align: center;
             background: #000;
         }
     </style>
@@ -129,35 +133,48 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="content">
+        <div class="content fade">
             <h1>Transformamos ambientes em experiências</h1>
             <p>Tobias Barreto - Sergipe</p>
-
-            <a href="https://wa.me/5579981261812" class="btn">WhatsApp</a>
+            <a href="https://wa.me/5579981261812" class="btn">Orçamento no WhatsApp</a>
             <a href="https://instagram.com/pinturasexpress" class="btn">Instagram</a>
         </div>
     </section>
 
     <!-- SERVIÇOS -->
-    <section class="section">
+    <section class="section fade">
         <h2>Nossos Serviços</h2>
         <div class="grid">
             <div class="card">Pintura Residencial</div>
             <div class="card">Pintura Comercial</div>
-            <div class="card">Texturas e Acabamentos</div>
+            <div class="card">Texturas Premium</div>
             <div class="card">Reformas</div>
         </div>
     </section>
 
-    <!-- DIFERENCIAL -->
-    <section class="section">
-        <h2>Por que escolher a Pinturas Express?</h2>
-        <p>Equipe profissional, acabamento premium e compromisso com qualidade e prazo.</p>
+    <!-- ANTES E DEPOIS -->
+    <section class="section fade">
+        <h2>Antes e Depois</h2>
+        <div class="grid">
+            <div class="card">Projeto 1</div>
+            <div class="card">Projeto 2</div>
+            <div class="card">Projeto 3</div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section fade">
+        <h2>Clientes Satisfeitos</h2>
+        <div class="grid">
+            <div class="card">"Serviço perfeito, recomendo muito!"</div>
+            <div class="card">"Equipe profissional e rápida"</div>
+            <div class="card">"Melhor pintura da região!"</div>
+        </div>
     </section>
 
     <!-- CTA -->
-    <section class="cta">
-        <h2>Solicite seu orçamento agora</h2>
+    <section class="section fade">
+        <h2>Deixe seu ambiente novo hoje mesmo</h2>
         <a href="https://wa.me/5579981261812" class="btn">Falar no WhatsApp</a>
     </section>
 
@@ -166,6 +183,23 @@
     </footer>
 
     <a href="https://wa.me/5579981261812" class="whatsapp">💬</a>
+
+    <script>
+        const elements = document.querySelectorAll('.fade');
+
+        function showOnScroll() {
+            const trigger = window.innerHeight * 0.85;
+            elements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < trigger) {
+                    el.classList.add('show');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', showOnScroll);
+        showOnScroll();
+    </script>
 
 </body>
 
