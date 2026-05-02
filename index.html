@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinturas Express</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: #fff;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .overlay h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .overlay p {
+            margin-bottom: 20px;
+        }
+
+        /* BOTÕES */
+        .btn {
+            display: inline-block;
+            background: #00ff88;
+            color: #000;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #00cc6a;
+        }
+
+        /* SEÇÕES */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* WHATS FLUTUANTE */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #000;
+            padding: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="hero">
+        <img src="images/banner.png" alt="Pinturas Express">
+        <div class="overlay">
+            <h1>Transformamos ambientes em experiências</h1>
+            <p>Tobias Barreto - Sergipe</p>
+
+            <a href="https://wa.me/5579981261812" class="btn">WhatsApp</a>
+            <a href="https://instagram.com/pinturasexpress" class="btn">Instagram</a>
+        </div>
+    </header>
+
+    <section>
+        <h2>Nossos Serviços</h2>
+        <div class="grid">
+            <div class="card">Pintura Residencial</div>
+            <div class="card">Pintura Comercial</div>
+            <div class="card">Texturas e Acabamentos</div>
+            <div class="card">Reformas</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Por que escolher a Pinturas Express?</h2>
+        <p>Equipe profissional, acabamento premium e compromisso com qualidade e prazo.</p>
+    </section>
+
+    <section>
+        <h2>Solicite seu orçamento agora</h2>
+        <a href="https://wa.me/5579981261812" class="btn">Falar no WhatsApp</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Pinturas Express - Tobias Barreto/SE</p>
+    </footer>
+
+    <a href="https://wa.me/5579981261812" class="whatsapp-float">💬</a>
+
+</body>
+
+</html>
